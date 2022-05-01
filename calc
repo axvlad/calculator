@@ -1,0 +1,157 @@
+using System;
+
+namespace Calc
+{
+    class Program
+    {
+        #region number 1
+        public static int number1(int c)
+        {
+            Console.WriteLine("Enter first number");
+            c = Convert.ToInt32(Console.ReadLine());
+            return c;
+
+        }
+        #endregion
+        #region number 2
+        public static int number2(int b)
+        {
+            Console.WriteLine("Enter second number");
+            b = Convert.ToInt32(Console.ReadLine());
+            return b;
+        }
+        #endregion
+        #region modul
+        public static void modul(int c, int b, ConsoleColor color)
+        {
+            Console.WriteLine("Enter first number");
+            c = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter second number");
+            b = Convert.ToInt32(Console.ReadLine());
+            int mod = c % b;
+            Console.ForegroundColor = color;
+            Console.WriteLine("Result = " + mod);
+        }
+        #endregion
+        #region ColorResult
+        public static void ColorResult(string str, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(str);
+            Console.ForegroundColor = default;
+
+        }
+        #endregion
+        #region Input
+        public static void Input()
+        {
+            Console.Write("Please input action eg:\n --->[");
+            ColorResult("\"+ - / * $ % ^\"", ConsoleColor.DarkGreen);
+            Console.Write("]<---\nOR\n");
+            ColorResult(" \"A - Addition, S - Subtract, D - Divide, M - Multiply, R - Root, P - Power, MO - Modulo\"\n", ConsoleColor.DarkGreen);
+            Console.Write("Input [");
+            ColorResult("exit", ConsoleColor.DarkRed);
+            Console.Write("] - to finish\n");
+        }
+        #endregion
+        static void Main(string[] args)
+        {
+            bool useCalc = true;
+            do
+            {
+                Input();
+                try
+                {
+                    switch (Console.ReadLine()?.ToLower())
+                    {
+                        case "+":
+                        case "a":
+                        case "addition":
+                        case "add":
+                            ColorResult("Result = " + (number1(0) + number2(0)), ConsoleColor.DarkGreen);
+                            //Console.WriteLine(("Result = " + (number1(0) + number2(0))));
+                            break;
+                        case "-":
+                        case "s":
+                        case "subtract":
+                        case "sub":
+                            ColorResult("Result = " + (number1(0) - number2(0)), ConsoleColor.DarkGreen);
+                            break;
+                        case "*":
+                        case "m":
+                        case "multiply":
+                        case "mul":
+                            ColorResult("Result = " + (number1(0) * number2(0)), ConsoleColor.DarkGreen);
+                            break;
+                        case "/":
+                        case "d":
+                        case "divide":
+                        case "div":
+                            ColorResult("Result = " + (Convert.ToDouble(number1(0) / Convert.ToDouble(number2(0)))), ConsoleColor.DarkGreen);
+                            break;
+                        case "exit":
+                            ColorResult("bye bye", ConsoleColor.DarkRed); // Exit of Calc
+                            break;
+                        case "$":
+                        case "r":
+                        case "root":
+                        case "rt":
+                            ColorResult("Result = " + (Math.Sqrt(Convert.ToDouble(number1(0)))), ConsoleColor.DarkGreen);
+                            break;
+                        case "^":
+                        case "p":
+                        case "power":
+                        case "pwr":
+                            ColorResult("Result = " + (Math.Pow(Convert.ToDouble(number1(0)), Convert.ToDouble(number2(0)))), ConsoleColor.DarkGreen);
+                            break;
+                        case "%":
+                        case "mo":
+                        case "modulo":
+                        case "mod":
+                            modul(0, 0, ConsoleColor.DarkGreen);
+                            //ColorResult("Result = " + (number1(0) % number2(0)), ConsoleColor.DarkGreen);
+                            break;
+                        default:
+                            ColorResult("Invalid input :( \nClick Enter and try again\nYou will definitely succeed", ConsoleColor.DarkRed);
+                            break;
+                    }
+
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("Enter action please");
+                }
+                catch (DivideByZeroException)
+                {
+                    Console.WriteLine("You can't divide by zero");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Range of argument is too big");
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("Incorrect value");
+                }
+                catch (InvalidCastException)
+                {
+                    Console.WriteLine("Invalid type conversions");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("The number is more than necessary");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Something went wrong\n Try again");
+                }
+
+                Console.ReadLine();
+                Console.Clear();
+
+            } while (useCalc == true);
+            Console.ReadLine();
+
+        }
+    }
+}
