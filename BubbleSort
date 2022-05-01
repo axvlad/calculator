@@ -1,0 +1,56 @@
+using System;
+
+namespace BubbleSort
+{
+    class Program
+    {
+        public static void Bubble_Sort(int[] anArray)
+        {
+            PrintArray(anArray);
+            for (int i = 0; i < anArray.Length; i++)
+            {
+                for (int j = 0; j < anArray.Length - 1 - i; j++)
+                {
+                    if (anArray[j] < anArray[j + 1])
+                    {
+                        //Swap the array element with index j and the one following it
+                        Swap(ref anArray[j], ref anArray[j + 1]);
+                    }
+                }
+                PrintArray(anArray);
+            }
+        }
+
+        //Helper method, swap two elements
+        public static void Swap(ref int aFirstArg, ref int aSecondArg)
+        {
+            //Temporary (auxiliary) variable, stores the value of the first element
+            int tmpParam = aFirstArg;
+
+            //The first argument got the value of the second
+            aFirstArg = aSecondArg;
+
+            //The second argument, got the previously saved value of the first
+            aSecondArg = tmpParam;
+        }
+
+        public static void PrintArray(int[] anArray)
+        {
+            for (int i = 0; i < anArray.Length; i++)
+            {
+                Console.Write(anArray[i] + " ");
+            }
+
+            Console.WriteLine("\n");
+        }
+
+        static void Main(string[] args)
+        {
+            int[] someArray = new int[] { 10, 94, 4, 13, 86, 15, 87, 96, 9, 0, -1 };
+
+            Bubble_Sort(someArray);
+
+            Console.ReadKey();
+        }
+    }
+}
